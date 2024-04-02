@@ -107,6 +107,7 @@ header input {
     place-content: center;
     gap: .7em;
     transition: transform 0.2s ease-in;
+    padding: 0.7em;
 }
 .cards.slide_left {
     transform: translateX(-100px);
@@ -122,6 +123,7 @@ header input {
     overflow: hidden;
     padding: .2em;
     background-color: rgba(31, 31, 31,.5);
+    border: 1px groove rgba(0, 0, 0, 0.4);
     transition:.2s ease-in-out
 }
 
