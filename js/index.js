@@ -41,11 +41,11 @@ const app = Vue.createApp({
 
     const filteredColors = Vue.computed(() => {
       switch (query.value) {
-        case "light-theme":
+        case "light-themes":
           return colors.value.filter(
             (color) => color.theme.toLowerCase() === "light"
           );
-        case "dark-theme":
+        case "dark-themes":
           return colors.value.filter(
             (color) => color.theme.toLowerCase() === "dark"
           );
