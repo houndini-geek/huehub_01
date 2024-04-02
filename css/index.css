@@ -38,6 +38,7 @@ header {
     color: #e7e6e6;
     border-bottom: 1px solid rgba(131, 130, 130, 0.2);
 }
+
 .filter_btns {
 
      position: fixed;
@@ -85,7 +86,7 @@ header {
     transition: transform 0.2s ease-in;
 }
 .cards .card {
-    height: 5rem;
+    height: 4rem;
     display: flex;
     justify-content:left;
     align-items: center;
@@ -133,6 +134,7 @@ padding: .3em;
     text-transform: capitalize;
     width: 100%;
     text-overflow: ellipsis;
+    overflow: hidden;
     white-space: nowrap;
     font-size: .9em;
     font-weight: 600;
