@@ -25,6 +25,17 @@ main {
     grid-template-columns: repeat(12,1fr);
 }
 
+@media screen and (max-width:800px){
+    main {
+        margin: 15% auto 0;
+    }
+}
+
+@media screen and (max-width:600px){
+    main {
+        margin: 20% auto 0;
+    }
+}
 header {
 
     position: fixed;
