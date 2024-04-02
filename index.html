@@ -57,11 +57,12 @@
     <main id="app">
       <header>
         <h1>huehud</h1>
+        <input type="search" name="" id="" placeholder="Search colors by name" v-model="query">
       </header>
 
       <div class="filter_btns">
         <button
-          @click="lightThemes('light')"
+          @click="lightThemes('light-theme')"
           class="light-themes"
           title="Display light themes colors"
         >
@@ -78,7 +79,7 @@
           </svg>
         </button>
         <button
-          @click="darkThemes('dark')"
+          @click="darkThemes('dark-theme')"
           class="dark-themes"
           title="Display dark themes colors"
         >
@@ -94,7 +95,7 @@
             ></path>
           </svg>
         </button>
-        <button @click="displayAll" title="Display all colors">
+        <button @click="displayAll('all_colors')" title="Display all colors">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -127,30 +128,30 @@
           loading colors...
         </div>
 
-        <div v-else class="card" v-for="color in colors" :key="color">
-          <div
-            class="preview-card"
-            @click="displayGroup(color.group,color.hex)"
-            :style="{backgroundColor: '#' + color.hex }"
-          ></div>
-          <div class="right-side">
-            <h4>{{color.name}}</h4>
-            <span>#{{color.hex}}</span>
-            <button title="Copy HEX" @click="copyHex(color.hex)">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-                fill="#000000"
-                viewBox="0 0 256 256"
-              >
-                <path
-                  d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z"
-                ></path>
-              </svg>
-            </button>
-          </div>
+       <div v-else class="card" v-for="color in filteredColors" :key="color">
+        <div
+          class="preview-card"
+          @click="displayGroup(color.group,color.hex)"
+          :style="{backgroundColor: '#' + color.hex }"
+        ></div>
+        <div class="right-side">
+          <h4>{{color.name}}</h4>
+          <span>#{{color.hex}}</span>
+          <button title="Copy HEX" @click="copyHex(color.hex)">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="15"
+              height="15"
+              fill="#000000"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z"
+              ></path>
+            </svg>
+          </button>
         </div>
+      </div>
       </div>
 
       <aside :class="{active: isCardCliked}">

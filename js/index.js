@@ -3,56 +3,69 @@ const app = Vue.createApp({
     const themes = Vue.ref("");
     const colors = Vue.ref("");
     const colorsRef = Vue.ref("");
+    const query = Vue.ref("");
+    const single_color = Vue.ref("");
+    const allGroups = Vue.ref("");
 
-    const single_color = Vue.ref('');
-    const allGroups = Vue.ref('');
-
-    const  isCardCliked = Vue.ref(false)
+    const isCardCliked = Vue.ref(false);
 
     const lightThemes = (theme) => {
-      displayTheme(theme);
+      query.value = theme;
     };
     const darkThemes = (theme) => {
-      displayTheme(theme);
+      query.value = theme;
     };
 
-    const displayTheme = (theme) => {
-      const findThemes = colorsRef.value.filter(
-        (colors) => colors.theme == theme
-      );
-
-      findThemes
-        ? (colors.value = findThemes)
-        : console.log("Cannot find this theme");
-    };
-    const displayAll = () => {
-      colors.value = colorsRef.value;
+    const displayAll = (all_colors) => {
+      query.value = all_colors;
     };
 
     const displayGroup = (colorGroup, colorHex) => {
-      const singleColor = colorsRef.value.find(color => color.hex.toLowerCase() === colorHex.toLowerCase())
-      const groups = colorsRef.value.filter(colors => colors.group.toLowerCase() === colorGroup.toLowerCase());
+      const singleColor = colorsRef.value.find(
+        (color) => color.hex.toLowerCase() === colorHex.toLowerCase()
+      );
+      const groups = colorsRef.value.filter(
+        (colors) => colors.group.toLowerCase() === colorGroup.toLowerCase()
+      );
 
       if (groups) {
-       allGroups.value = groups
+        allGroups.value = groups;
       }
 
       if (singleColor) {
-        single_color.value = singleColor
+        single_color.value = singleColor;
       }
 
-      isCardCliked.value = true
-    }
+      isCardCliked.value = true;
+    };
+
+    const filteredColors = Vue.computed(() => {
+      switch (query.value) {
+        case "light-theme":
+          return colors.value.filter(
+            (color) => color.theme.toLowerCase() === "light"
+          );
+        case "dark-theme":
+          return colors.value.filter(
+            (color) => color.theme.toLowerCase() === "dark"
+          );
+        case "all_colors":
+          return colors.value;
+        default:
+          return colors.value.filter((color) =>
+            color.name.toLowerCase().startsWith(query.value.toLowerCase())
+          );
+      }
+    });
 
     const copyHex = (hex) => {
-
       try {
-      navigator.clipboard.writeText(hex);
-      alert(`${hex} copied to clipboard`);
+        navigator.clipboard.writeText(hex);
+        alert(`${hex} copied to clipboard`);
       } catch (error) {
-        alert('An error occured');
+        alert("An error occured");
       }
-    }
+    };
 
     Vue.onMounted(async () => {
       try {
@@ -61,7 +74,7 @@ const app = Vue.createApp({
         colors.value = results.data;
         colorsRef.value = results.data;
       } catch (error) {
-        console.log("Failed to fetch", error.message);
+        console.log(error.message);
       }
     });
 
@@ -71,12 +84,14 @@ const app = Vue.createApp({
       displayAll,
       displayGroup,
       copyHex,
+      filteredColors,
       themes,
       colors,
       colorsRef,
       allGroups,
       single_color,
-      isCardCliked
+      isCardCliked,
+      query,
     };
   },
 });

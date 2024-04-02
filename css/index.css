@@ -48,6 +48,23 @@ header {
     background-color: #262626;
     color: #e7e6e6;
     border-bottom: 1px solid rgba(131, 130, 130, 0.2);
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 3em;
+}
+
+header input {
+
+    display: inline-block;
+     height: 2rem;
+     outline: none;
+     border-radius: 0.3em;
+     border: 1px solid rgba(100, 100, 100, 0.4);
+     background-color: #e7e6e6;
+     font-weight: 700;
+     padding: 0.3em;
+     color: #262626;
 }
 
 .filter_btns {
